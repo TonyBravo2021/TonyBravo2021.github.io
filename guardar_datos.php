@@ -1,7 +1,7 @@
 <?php
 $datos = $_POST['datos'];
 
-$archivo = fopen("datos.txt", "a");
+$archivo = fopen("/datos.txt", "a");
 if ($archivo) {
   fwrite($archivo, $datos . "\n");
   fclose($archivo);
