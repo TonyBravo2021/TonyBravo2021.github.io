@@ -1,77 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Formulario con Form.io</title>
-  <script src="https://cdn.form.io/formio.full.min.js"></script>
+  <title>Formulario</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-  <div id="formio"></div>
+  <h1>Formulario</h1>
+  <form id="formulario">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" required><br><br>
+    <label for="edad">Edad:</label>
+    <input type="number" id="edad" required><br><br>
+    <input type="submit" value="Guardar">
+  </form>
 
   <script>
-    // Configuración del formulario
-    var formioForm = new Formio.Form(document.getElementById('formio'), {
-      "components": [
-        {
-          "type": "textfield",
-          "label": "Nombre",
-          "key": "name",
-          "input": true
-        },
-        {
-          "type": "email",
-          "label": "Correo electrónico",
-          "key": "email",
-          "input": true
-        },
-        {
-          "type": "textarea",
-          "label": "Mensaje",
-          "key": "message",
-          "input": true
-        },
-        {
-          "type": "button",
-          "label": "Enviar",
-          "key": "submit",
-          "buttonType": "submit",
-          "input": true
-        }
-      ]
-    });
-
-    // Evento al enviar el formulario
-    formioForm.on('submit', function(submission) {
-      // Agregar la configuración de envío de correo electrónico
-      var emailAction = {
-        "type": "email",
-        "action": "url",
-        "method": "POST",
-        "headers": [
-          {
-            "key": "Content-Type",
-            "value": "application/json"
-          }
-        ],
-        "url": "https://api.form.io/form/:formId/email",
-        "message": {
-          "from": "noreply@example.com",
-          "subject": "Respuesta del formulario",
-          "html": "<p>Se ha recibido una respuesta del formulario:</p><p>Nombre: {{ data.name }}</p><p>Correo electrónico: {{ data.email }}</p><p>Mensaje: {{ data.message }}</p>",
-          "to": "rbravo@ugel07.gob.pe"
-        }
-      };
-
-      // Configurar el ID del formulario
-      var formId = 'tu-formulario-id-aqui';
-
-      // Reemplazar :formId en la URL con el ID del formulario
-      emailAction.url = emailAction.url.replace(':formId', formId);
-
-      // Enviar la solicitud de envío de correo electrónico
-      Formio.makeStaticRequest(emailAction, 'POST', submission, function(response) {
-        console.log(response);
-        // Aquí puedes realizar acciones adicionales después de enviar el correo electrónico
+    $(document).ready(function() {
+      $("#formulario").submit(function(event) {
+        event.preventDefault();
+        guardarDatos();
       });
+
+      function guardarDatos() {
+        var nombre = $("#nombre").val();
+        var edad = $("#edad").val();
+
+        $.ajax({
+          type: "POST",
+          url: "guardar_datos.php", // Ruta del archivo PHP para guardar los datos
+          data: { nombre: nombre, edad: edad },
+          success: function(response) {
+            alert("Datos guardados correctamente");
+            $("#nombre").val("");
+            $("#edad").val("");
+          },
+          error: function() {
+            alert("Error al guardar los datos");
+          }
+        });
+      }
     });
   </script>
 </body>
