@@ -15,7 +15,7 @@ document.getElementById('myForm').addEventListener('submit', function(event) {
   var jsonData = JSON.stringify(formData);
 
   // Realiza una solicitud POST a la GitHub API para guardar los datos en el archivo JSON
-  fetch('https://api.github.com/repos/{usuario}/{repositorio}/contents/formulario.json', {
+  fetch('https://api.github.com/repos/TonyBravo2021/TonyBravo2021.github.io/formulario.json', {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
