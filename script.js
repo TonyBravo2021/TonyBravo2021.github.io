@@ -1,27 +1,44 @@
-// Listener para el evento 'submit' del formulario
 document.getElementById('myForm').addEventListener('submit', function(event) {
-  event.preventDefault(); // Previene el envío por defecto del formulario
+  event.preventDefault();
 
-  // Obtiene los valores de los campos del formulario
   var name = document.getElementById('name').value;
   var email = document.getElementById('email').value;
   var message = document.getElementById('message').value;
 
-  // Crea un objeto con los datos del formulario
   var formData = {
     name: name,
     email: email,
     message: message
   };
 
-  // Convierte el objeto a formato JSON
+  // Convierte los datos a formato JSON
   var jsonData = JSON.stringify(formData);
 
-  // Crea un elemento 'a' para descargar el archivo
-  var downloadLink = document.createElement('a');
-  downloadLink.href = 'data:application/json;charset=utf-8,' + encodeURIComponent(jsonData);
-  downloadLink.download = 'formulario.json';
-
-  // Simula un clic en el enlace para iniciar la descarga
-  downloadLink.click();
+  // Realiza una solicitud POST a la GitHub API para guardar los datos en el archivo JSON
+  fetch('https://api.github.com/repos/{usuario}/{repositorio}/contents/formulario.json', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'token {tu_token_de_autenticacion}'
+    },
+    body: JSON.stringify({
+      message: 'Actualizar formulario.json',
+      content: btoa(jsonData), // Codifica el contenido en Base64
+      branch: 'main' // Rama en la que deseas guardar los datos
+    })
+  })
+  .then(function(response) {
+    if (response.ok) {
+      // Si la respuesta del servidor es exitosa, muestra un mensaje al usuario
+      alert('Los datos se han guardado correctamente.');
+    } else {
+      // Si la respuesta del servidor es un error, muestra un mensaje de error
+      alert('Error al guardar los datos.');
+    }
+  })
+  .catch(function(error) {
+    // Si ocurre un error en la comunicación con el servidor, muestra un mensaje de error
+    alert('Error en la comunicación con el servidor.');
+    console.error(error);
+  });
 });
