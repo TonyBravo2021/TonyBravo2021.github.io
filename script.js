@@ -19,7 +19,7 @@ document.getElementById('myForm').addEventListener('submit', function(event) {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer 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'
+      'Authorization': 'Bearer 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'
     },
     body: JSON.stringify({
       message: 'Actualizar formulario.json',
