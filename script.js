@@ -15,11 +15,11 @@ document.getElementById('myForm').addEventListener('submit', function(event) {
   var jsonData = JSON.stringify(formData);
 
   // Realiza una solicitud POST a la GitHub API para guardar los datos en el archivo JSON
-  fetch('https://api.github.com/repos/TonyBravo2021/TonyBravo2021.github.io/formulario.json', {
+  fetch('https://api.github.com/repos/TonyBravo2021/TonyBravo2021.github.io/contents/formulario.json', {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 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'
+      'Authorization': 'Bearer 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'
     },
     body: JSON.stringify({
       message: 'Actualizar formulario.json',
