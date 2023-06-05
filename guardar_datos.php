@@ -1,19 +1,17 @@
 <?php
-// Obtener los datos enviados mediante la solicitud POST
-$data = json_decode(file_get_contents('php://input'), true);
+// Obtener los valores enviados por el formulario
+$texto1 = $_POST['texto1'];
+$texto2 = $_POST['texto2'];
+$texto3 = $_POST['texto3'];
+$texto4 = $_POST['texto4'];
 
-// Obtener los valores de los campos del formulario
-$name = $data['name'];
-$email = $data['email'];
-$message = $data['message'];
+// Crear una cadena con los datos del formulario
+$datos_formulario = "Texto 1: $texto1\nTexto 2: $texto2\nTexto 3: $texto3\nTexto 4: $texto4\n";
 
-// Aquí puedes realizar la lógica de guardado de datos en el formato que desees (por ejemplo, base de datos, archivo, etc.)
+// Guardar los datos en un archivo de texto
+$archivo = 'datos_formulario.txt';
+file_put_contents($archivo, $datos_formulario, FILE_APPEND);
 
-// Ejemplo de guardado en un archivo de texto
-$file = 'datos.txt';
-$content = "Nombre: $name\nEmail: $email\nMensaje: $message\n\n";
-file_put_contents($file, $content, FILE_APPEND);
-
-// Devolver una respuesta al cliente indicando el estado del guardado
-http_response_code(200);
+// Mostrar un mensaje de éxito
+echo 'Los datos se han guardado correctamente.';
 ?>
