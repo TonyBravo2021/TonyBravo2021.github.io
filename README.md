@@ -1,26 +1,18 @@
-# Formularios varios
+# jQuery-Tabledit v1.2.3
+Inline editor for HTML tables compatible with Bootstrap.
 
-Breve descripción o resumen del proyecto.
 
-## Características
+## Examples
+http://markcell.github.io/jquery-tabledit/#examples
 
-- Característica 1
-- Característica 2
-- Característica 3
 
-## Requisitos
+## Documentation
+http://markcell.github.io/jquery-tabledit/#documentation
 
-- Requisito 1
-- Requisito 2
-- Requisito 3
 
-## Instalación
+## Changelog
+See CHANGELOG.md file.
 
-1. Clona este repositorio: `git clone https://github.com/tu-usuario/nombre-del-repo.git`
-2. Ingresa al directorio del proyecto: `cd nombre-del-repo`
-3. Instala las dependencias: `npm install`
 
-## Uso
-
-Descripción de cómo usar o ejecutar el proyecto. Proporciona ejemplos de comandos o instrucciones claras para utilizarlo correctamente.
-
+## License
+Code released under the MIT license.
